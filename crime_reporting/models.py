@@ -1,5 +1,5 @@
 import logging
-import calculate
+# import calculate
 from datetime import datetime
 from django.conf import settings
 from django.db import models
