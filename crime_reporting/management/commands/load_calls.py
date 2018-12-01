@@ -17,15 +17,24 @@ class Command(BaseCommand):
         """
         Wipe all the calls in the database.
         """
-        Call.object.all().delete()
+        Call.objects.all().delete()
 
-    def parse_timestamp(self, t):
+    def parse_queued_timestamp(self, q):
+        """
+        Get a python timestamp object from the Arrived Time column in CSV
+        """
+        if q:
+            parsed_queued_timestamp = datetime.strptime(
+                q, "%m/%d/%Y %I:%M:%S %p")
+            return parsed_queued_timestamp
+
+    def parse_arrival_timestamp(self, t):
         """
         Get a python timestamp object from the Arrived Time column in CSV
         """
         if t:
-            parsed_timestamp = datetime.strptime(t, "%b %d %Y %I:%M:%S:%f%p")
-            return parsed_timestamp
+            parsed_arrival_timestamp = datetime.strptime(t, "%b %d %Y %I:%M:%S:%f%p")
+            return parsed_arrival_timestamp
 
     def handle(self, *args, **options):
         """
@@ -54,8 +63,11 @@ class Command(BaseCommand):
                     call_priority = row["Priority"],
                     initial_call_type = row["Initial Call Type"],
                     final_call_type = row["Final Call Type"],
-                    time_queued = row["Original Time Queued"],
-                    first_officer_arrival_time = self.parse_timestamp(
+                    # time_queued = row["Original Time Queued"],
+                    # first_officer_arrival_time=row["Arrived Time"],
+                    time_queued = self.parse_queued_timestamp(
+                        row["Original Time Queued"]),
+                    first_officer_arrival_time = self.parse_arrival_timestamp(
                         row["Arrived Time"]),
                     precinct = row["Precinct"],
                     sector = row["Sector"],
@@ -67,5 +79,5 @@ class Command(BaseCommand):
         # Batch upload calls to the database, 500 at a time
         Call.objects.bulk_create(
             call_list,
-            batch_size=500
+            batch_size=50
         )
