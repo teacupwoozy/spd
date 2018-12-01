@@ -31,7 +31,8 @@ class Command(BaseCommand):
         """
         Load in CSV of all police calls, creating Call objects.
         """
-        self.data_dir = os.path.join(settings.ROOT_DIR, 'crime_reporting', 'data')
+        self.data_dir = os.path.join(
+            settings.ROOT_DIR, 'crime_reporting', 'data')
         # From Data Desk code:
         logger.debug("flushing calls")
         self.flush_calls()
@@ -46,22 +47,22 @@ class Command(BaseCommand):
             reader = csv.DictReader(open(path, 'r'))
             for row in reader:
                 c = Call(
-                    cad_number=row["CAD Event Number"],
-                    call_clearance_description=row[
+                    cad_number = row["CAD Event Number"],
+                    call_clearance_description = row[
                         "Event Clearance Description"],
-                    method_call_received=row["Call Type"],
-                    call_priority=row["Priority"],
-                    initial_call_type=row["Initial Call Type"],
-                    final_call_type=row["Final Call Type"],
-                    time_queued=row["Original Time Queued"],
-                    first_officer_arrival_time=self.parse_timestamp(
+                    method_call_received = row["Call Type"],
+                    call_priority = row["Priority"],
+                    initial_call_type = row["Initial Call Type"],
+                    final_call_type = row["Final Call Type"],
+                    time_queued = row["Original Time Queued"],
+                    first_officer_arrival_time = self.parse_timestamp(
                         row["Arrived Time"],
-                    precinct=row["Precinct"],
-                    sector=row["Sector"],
-                    beat=row["Beat"]
-                )
-            
-            call_list.append(c)
+                    precinct = row["Precinct"],
+                    sector = row["Sector"],
+                    beat = row["Beat"]
+                    )
+
+                call_list.append(c)
 
         # Batch upload calls to the database, 500 at a time
         Call.objects.bulk_create(
