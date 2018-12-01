@@ -56,7 +56,7 @@ class Command(BaseCommand):
                     final_call_type = row["Final Call Type"],
                     time_queued = row["Original Time Queued"],
                     first_officer_arrival_time = self.parse_timestamp(
-                        row["Arrived Time"],
+                        row["Arrived Time"]),
                     precinct = row["Precinct"],
                     sector = row["Sector"],
                     beat = row["Beat"]
