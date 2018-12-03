@@ -41,7 +41,9 @@ class Command(BaseCommand):
         If final call type is a kind of sexual assault, make true.
         """
         
-        if "rape" in c.final_call_type:
+        if "FAILURE" in c.final_call_type or "RACIAL" in c.final_call_type:
+            return False
+        elif "RAPE" in c.final_call_type or "SEX" in c.final_call_type:
             return True
         else:
             return False
