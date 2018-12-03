@@ -30,7 +30,8 @@ class Call(models.Model):
     beat = models.CharField(max_length=3, blank=True, null=True)
 
     # Add add-on columns
-    # is crime a sex assault
+    # is crime a sexual assault, default value is False
+    is_sexual_assault = models.BooleanField()
     
     # Managers
     objects = models.Manager()

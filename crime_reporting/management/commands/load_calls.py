@@ -36,6 +36,16 @@ class Command(BaseCommand):
             parsed_arrival_timestamp = datetime.strptime(t, "%b %d %Y %I:%M:%S:%f%p")
             return parsed_arrival_timestamp
 
+    def get_is_sexual_assault(self, c):
+        """
+        If final call type is a kind of sexual assault, make true.
+        """
+        
+        if "rape" in c.final_call_type:
+            return True
+        else:
+            return False
+
     def handle(self, *args, **options):
         """
         Load in CSV of all police calls, creating Call objects.
@@ -49,7 +59,7 @@ class Command(BaseCommand):
         call_list = []
 
         # Source CSV
-        paths = ['All_2016_to_11_28_2018.csv']
+        paths = ['2018_Q1_All.csv']
 
         for p in paths:
             path = os.path.join(self.data_dir, p)
@@ -73,6 +83,9 @@ class Command(BaseCommand):
                     sector = row["Sector"],
                     beat = row["Beat"]
                     )
+                
+                # Call back to methods on Call model
+                c.is_sexual_assault = self.get_is_sexual_assault(c)
 
                 call_list.append(c)
 
