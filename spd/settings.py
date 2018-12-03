@@ -29,7 +29,7 @@ ROOT_DIR = os.path.join(
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'nope'
+SECRET_KEY = ''nope
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

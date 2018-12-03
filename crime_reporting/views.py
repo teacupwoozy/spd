@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from .models import Call
 
 # Create your views here.
 
@@ -9,4 +10,5 @@ def index(request):
 
 def call_analysis(request):
     # return render(request, 'crime_reporting/templates/call_analysis.html', {})
-    return HttpResponse("Call analysis page")
+    return render(request, 'crime_reporting/call_analysis.html')
+    # return HttpResponse("Call analysis page")
