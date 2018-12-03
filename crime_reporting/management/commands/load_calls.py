@@ -42,14 +42,14 @@ class Command(BaseCommand):
         """
         self.data_dir = os.path.join(
             settings.ROOT_DIR, 'crime_reporting', 'data')
-        # From Data Desk code:
+        # Delete all data in db:
         logger.debug("flushing calls")
         self.flush_calls()
 
         call_list = []
 
         # Source CSV
-        paths = ['2018_Q1_All.csv']
+        paths = ['All_2016_to_11_28_2018.csv']
 
         for p in paths:
             path = os.path.join(self.data_dir, p)
