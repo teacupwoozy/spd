@@ -23,8 +23,6 @@ class Call(models.Model):
     final_call_type = models.CharField(max_length=120, blank=True, null=True)
     time_queued = models.DateTimeField(blank=True, null=True)
     first_officer_arrival_time = models.DateTimeField(blank=True, null=True)
-    # time_queued = models.CharField(max_length=40, blank=True, null=True)
-    # first_officer_arrival_time = models.CharField(max_length=40, blank=True, null=True)
     precinct = models.CharField(max_length=20, blank=True, null=True)
     sector = models.CharField(max_length=20, blank=True, null=True)
     beat = models.CharField(max_length=3, blank=True, null=True)
