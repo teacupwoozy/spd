@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Call Analysis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
 </head>
 <body>
     {% block content %}
@@ -16,6 +16,14 @@
     <div>
         <h2>Sexual Assault Count (1/2016 - 11/2018)</h2>
         <p>Is a sexual assault call: {{ is_sexual_assault_count | intcomma }} </p>
+        <p>Is a lewd conduct call: {{ is_lewd_conduct_count | intcomma }} </p>
+        <p>Is a molesting call: {{ is_molesting_count | intcomma }} </p>
+        <p>Is a commercial exploitation of minors (CSEC) call: {{ is_CSEC_count | intcomma }} </p>
+        <p>Is a rape call: {{ is_rape_call_type_count | intcomma }} </p>
+        <p>Is an in-progress or just-occurred rape call: {{ is_ip_jo_rape_count | intcomma }} </p>
+        <p>Is an aquaintance rape call: {{ is_aquaintance_rape_count | intcomma }} </p>
+        <p>Is a stranger rape call: {{ is_stranger_rape_count | intcomma }} </p>
+        <p>Total of all rapes reported: {{ is_rape_count | intcomma }} </p>
     </div>
     {% endblock %}
 </body>

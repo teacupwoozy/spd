@@ -38,7 +38,7 @@ class Command(BaseCommand):
 
     def get_is_sexual_assault(self, c):
         """
-        If final call type is a kind of sexual assault, make true.
+        If final call type is a kind of sexual assault, make True.
         """
         
         if "FAILURE" in c.final_call_type or "RACIAL" in c.final_call_type:
@@ -47,6 +47,21 @@ class Command(BaseCommand):
             return True
         else:
             return False
+
+    def get_is_rape(self, c):
+        """
+        If final call type is any type of rape, make True.
+        """
+
+        # if "FAILURE" in c.final_call_type or "LEWD" in c.final_call_type:
+        #     return False
+        # elif "MOLESTING" in c.final_call_type:
+        #     return False
+        if "RAPE" in c.final_call_type:
+            return True
+        else:
+            return False
+
 
     def handle(self, *args, **options):
         """
@@ -88,6 +103,7 @@ class Command(BaseCommand):
                 
                 # Call back to methods on Call model
                 c.is_sexual_assault = self.get_is_sexual_assault(c)
+                c.is_rape = self.get_is_rape(c)
 
                 call_list.append(c)
 
