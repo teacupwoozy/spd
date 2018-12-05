@@ -32,6 +32,7 @@ class Call(models.Model):
     is_sexual_assault = models.BooleanField()
     # Is crime a rape, default value is False
     is_rape = models.BooleanField()
+
     
     # Managers
     objects = models.Manager()
@@ -41,3 +42,12 @@ class Call(models.Model):
 
     def __str__(self):
         return self.cad_number
+
+    def get_is_rape(self, c):
+        """
+        If final call type is any type of rape, make True.
+        """
+        if "LEWD" in c.final_call_type:
+            return True
+        else:
+            return False

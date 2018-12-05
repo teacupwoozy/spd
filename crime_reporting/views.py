@@ -84,7 +84,7 @@ class CallAnalysis(TemplateView):
 
         context['is_rape'] = calls.filter(is_rape=True)
         # Count of is_rape
-        context['is_rape_count'] = context['is_rape'].count()
+        context['is_rape_count'] = 12 #context['is_rape'].count()
 
 
 
